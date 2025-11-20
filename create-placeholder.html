@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Create Placeholder Images</title>
+</head>
+<body>
+    <h1>Tạo Placeholder Images</h1>
+    <p>Script này sẽ tạo placeholder images để test. Mở file này trong browser và click nút.</p>
+    <button onclick="createPlaceholders()">Tạo Placeholders</button>
+    <div id="output"></div>
+
+    <script>
+        function createPlaceholders() {
+            const artworks = [
+                'binh-minh-hy-vong',
+                'me-cung-noi-tam',
+                'dieu-nhay-cua-thoi-gian',
+                'nhung-manh-vo-ket-noi',
+                'giac-mo-sau-tham',
+                'vu-khuc-cua-gio'
+            ];
+
+            const colors = [
+                ['#FDB462', '#FFFFB3'],
+                ['#8DD3C7', '#BEBADA'],
+                ['#80B1D3', '#FDB462'],
+                ['#FFD700', '#FAFAFA'],
+                ['#1B4F72', '#5DADE2'],
+                ['#E8F5E9', '#81C784']
+            ];
+
+            artworks.forEach((name, index) => {
+                // Create full size
+                createImage(name, colors[index], 2000, 2667, false);
+                // Create thumbnail
+                createImage(name, colors[index], 600, 800, true);
+            });
+
+            document.getElementById('output').innerHTML = `
+                <h2>✅ Đã tạo placeholders!</h2>
+                <p>Bấm chuột phải vào mỗi ảnh và "Save Image As..." vào thư mục:</p>
+                <code>public/images/artworks/</code>
+                <div id="images"></div>
+            `;
+        }
+
+        function createImage(name, colors, width, height, isThumb) {
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+
+            // Gradient background
+            const gradient = ctx.createLinearGradient(0, 0, 0, height);
+            gradient.addColorStop(0, colors[0]);
+            gradient.addColorStop(1, colors[1]);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+
+            // Add text
+            ctx.fillStyle = '#334155';
+            ctx.font = `${Math.floor(width / 20)}px serif`;
+            ctx.textAlign = 'center';
+            ctx.fillText(name, width / 2, height / 2);
+
+            if (isThumb) {
+                ctx.fillText('(thumbnail)', width / 2, height / 2 + 100);
+            }
+
+            // Convert to image
+            const img = document.createElement('img');
+            img.src = canvas.toDataURL('image/jpeg', 0.9);
+            img.width = 300;
+            img.style.margin = '10px';
+            img.title = `Chuột phải > Save As > ${name}${isThumb ? '-thumb' : ''}.jpg`;
+
+            // Add download link
+            const link = document.createElement('a');
+            link.href = img.src;
+            link.download = `${name}${isThumb ? '-thumb' : ''}.jpg`;
+            link.appendChild(img);
+
+            document.getElementById('images').appendChild(link);
+        }
+    </script>
+</body>
+</html>

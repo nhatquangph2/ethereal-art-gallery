@@ -1,26 +1,294 @@
 @import "tailwindcss";
 
+/* Heavenly Palette - The Ethereal Art Gallery */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Base Colors - Light Mode */
+  --porcelain-white: #ffffff;
+  --cloud-blue: #f0f9ff;
+  --soft-sun: #fdf6e3;
+  --stone-gray: #334155;
+  --midnight-depth: #1e293b;
+
+  /* Accent Colors */
+  --gold-leaf: #ffd700;
+  --ethereal-purple: #a569bd;
+  --gentle-green: #81c784;
+
+  /* Semantic Colors */
+  --background: var(--cloud-blue);
+  --foreground: var(--stone-gray);
+  --surface: var(--porcelain-white);
+  --surface-muted: rgba(255, 255, 255, 0.6);
+
+  /* Glass Effects */
+  --glass-bg: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+
+  /* Light Bloom */
+  --bloom-glow: rgba(253, 246, 227, 0.4);
+  --bloom-radius: 60px;
+}
+
+/* Dark Mode */
+:root.dark {
+  /* Base Colors - Dark Mode */
+  --porcelain-white: #0f172a;
+  --cloud-blue: #1e293b;
+  --soft-sun: #334155;
+  --stone-gray: #e2e8f0;
+  --midnight-depth: #f1f5f9;
+
+  /* Semantic Colors */
+  --background: var(--cloud-blue);
+  --foreground: var(--stone-gray);
+  --surface: rgba(30, 41, 59, 0.9);
+  --surface-muted: rgba(30, 41, 59, 0.6);
+
+  /* Glass Effects */
+  --glass-bg: rgba(15, 23, 42, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+  /* Light Bloom */
+  --bloom-glow: rgba(255, 215, 0, 0.15);
+  --bloom-radius: 80px;
 }
 
 @theme inline {
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-surface: var(--surface);
+  --color-primary: var(--stone-gray);
+  --color-accent: var(--gold-leaf);
+  --color-ethereal: var(--ethereal-purple);
+  --color-nature: var(--gentle-green);
+
+  /* Typography */
+  --font-display: var(--font-cormorant);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
+
+  /* Custom Utilities */
+  --spacing-mobile-nav: 80px;
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-ethereal: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Base Styles */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Smooth transitions for theme changes */
+:root {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body,
+.glass,
+.glass-strong,
+button,
+input,
+textarea,
+select {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Glassmorphism Utility Classes */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+}
+
+/* Light Bloom Effects */
+.light-bloom {
+  position: relative;
+}
+
+.light-bloom::before {
+  content: '';
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(
+    circle at center,
+    var(--bloom-glow) 0%,
+    transparent 70%
+  );
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(var(--bloom-radius));
+}
+
+.light-bloom-subtle::before {
+  opacity: 0.3;
+  filter: blur(40px);
+}
+
+/* GPU Acceleration for Smooth Animations */
+.gpu-accelerated {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cloud-blue);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--stone-gray);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--midnight-depth);
+}
+
+/* Focus Styles for Accessibility */
+*:focus-visible {
+  outline: 2px solid var(--gold-leaf);
+  outline-offset: 2px;
+}
+
+/* Disable Text Selection on UI Elements */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+/* Smooth Image Loading */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Mobile-specific Optimizations */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: var(--spacing-mobile-nav);
+  }
+
+  /* Prevent zoom on input focus for iOS */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes gentle-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Utility Animation Classes */
+.animate-fade-in {
+  animation: fade-in 0.6s var(--transition-smooth) forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.8s var(--transition-ethereal) forwards;
+}
+
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.animate-gentle-pulse {
+  animation: gentle-pulse 3s ease-in-out infinite;
 }
