@@ -60,21 +60,9 @@ export function QRShareButton({ url, title, artist, className = '' }: QRShareBut
   };
 
   const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: title,
-          text: `Xem tác phẩm "${title}"${artist ? ` của ${artist}` : ''} tại Ethereal Art Gallery`,
-          url: fullUrl,
-        });
-        onTap();
-      } catch (err) {
-        console.log('Share cancelled');
-      }
-    } else {
-      setShowModal(true);
-      onTap();
-    }
+    // Always show QR modal for better UX
+    setShowModal(true);
+    onTap();
   };
 
   return (

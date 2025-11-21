@@ -133,7 +133,7 @@ export default function ArtworkPage() {
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="fixed left-6 top-6 z-40 hidden md:block"
+          className="fixed left-6 top-24 z-40 hidden md:block"
         >
           <button
             onClick={() => {
@@ -151,7 +151,7 @@ export default function ArtworkPage() {
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="fixed right-6 top-6 z-40 hidden md:flex md:flex-col md:gap-3"
+          className="fixed right-6 top-24 z-40 hidden md:flex md:flex-col md:gap-3"
         >
           <QRShareButton
             url={`/artwork/${artwork.id}`}
