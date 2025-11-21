@@ -38,17 +38,22 @@ export function CommentsSection({ artwork, onUpdate }: CommentsSectionProps) {
 
     if (existingReactionIndex >= 0) {
       const reaction = updatedReactions[existingReactionIndex];
-      const userIndex = reaction.users.indexOf(user.id);
+      const userIndex = reaction.users?.indexOf(user.id) ?? -1;
 
       if (userIndex >= 0) {
         // Remove reaction
-        reaction.users.splice(userIndex, 1);
+        if (reaction.users) {
+          reaction.users.splice(userIndex, 1);
+        }
         reaction.count = Math.max(0, reaction.count - 1);
         if (reaction.count === 0) {
           updatedReactions.splice(existingReactionIndex, 1);
         }
       } else {
         // Add reaction
+        if (!reaction.users) {
+          reaction.users = [];
+        }
         reaction.users.push(user.id);
         reaction.count++;
       }
@@ -67,7 +72,7 @@ export function CommentsSection({ artwork, onUpdate }: CommentsSectionProps) {
   const getUserReaction = (type: ReactionType): boolean => {
     if (!user) return false;
     const reaction = reactions.find(r => r.type === type);
-    return reaction ? reaction.users.includes(user.id) : false;
+    return reaction?.users?.includes(user.id) ?? false;
   };
 
   const getReactionCount = (type: ReactionType): number => {

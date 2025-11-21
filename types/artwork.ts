@@ -46,7 +46,7 @@ export type ReactionType = 'love' | 'inspiring' | 'thoughtful' | 'beautiful';
 export interface Reaction {
   type: ReactionType;
   count: number;
-  users: string[]; // Array of user IDs who reacted
+  users?: string[]; // Array of user IDs who reacted (optional)
 }
 
 /**
@@ -78,9 +78,11 @@ export interface Artwork {
  */
 export interface GalleryCollection {
   id: string;
-  title: string;
+  name?: string; // Collection name
+  title?: string; // Collection title
   description: string;
   artworks: Artwork[];
+  mood?: 'peaceful' | 'energetic' | 'mysterious' | 'joyful' | 'melancholic' | 'inspiring' | 'classical';
 }
 
 /**
