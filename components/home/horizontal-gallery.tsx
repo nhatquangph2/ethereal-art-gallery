@@ -23,10 +23,21 @@ export function HorizontalGallery({ title, artworks }: HorizontalGalleryProps) {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const x = useMotionValue(0);
   const springConfig = { damping: 30, stiffness: 300 };
   const xSpring = useSpring(x, springConfig);
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const checkScroll = () => {
     if (scrollContainerRef.current) {
@@ -171,11 +182,13 @@ export function HorizontalGallery({ title, artworks }: HorizontalGalleryProps) {
         >
           <motion.div
             className="flex gap-6 pb-4"
-            drag="x"
-            dragConstraints={scrollContainerRef}
-            onDragStart={() => setIsDragging(true)}
-            onDragEnd={() => setIsDragging(false)}
-            style={{ x: xSpring }}
+            {...(!isMobile && {
+              drag: "x",
+              dragConstraints: scrollContainerRef,
+              onDragStart: () => setIsDragging(true),
+              onDragEnd: () => setIsDragging(false),
+              style: { x: xSpring }
+            })}
           >
             {artworks.map((artwork, index) => (
               <motion.div

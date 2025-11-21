@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { SmoothScrollProvider } from '@/components/smooth-scroll-provider';
 import { BottomNavigation } from '@/components/ui/bottom-navigation';
 import { DesktopHeader } from '@/components/ui/desktop-header';
+import { QRShareButton } from '@/components/ui/qr-share-button';
 import { DeepZoomViewer } from '@/components/gallery/deep-zoom-viewer';
 import { getArtworkById, getRecommendedArtworks } from '@/data/artworks';
 import { ArtworkCard } from '@/components/gallery/artwork-card';
@@ -146,12 +147,17 @@ export default function ArtworkPage() {
           </button>
         </motion.div>
 
-        {/* Zoom Button */}
+        {/* Action Buttons (Desktop) */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="fixed right-6 top-6 z-40 hidden md:block"
+          className="fixed right-6 top-6 z-40 hidden md:flex md:flex-col md:gap-3"
         >
+          <QRShareButton
+            url={`/artwork/${artwork.id}`}
+            title={artwork.title}
+            artist={artwork.artist}
+          />
           <button
             onClick={() => {
               onTap();
@@ -162,6 +168,19 @@ export default function ArtworkPage() {
             <ZoomIn className="h-5 w-5 text-stone-gray" />
             <span className="font-medium text-stone-gray">Deep Zoom</span>
           </button>
+        </motion.div>
+
+        {/* Mobile Share Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="fixed bottom-24 right-6 z-40 md:hidden"
+        >
+          <QRShareButton
+            url={`/artwork/${artwork.id}`}
+            title={artwork.title}
+            artist={artwork.artist}
+          />
         </motion.div>
 
         {/* Hero Section with Sticky Image */}
