@@ -315,7 +315,7 @@ export function FeaturedCarousel({ artworks }: FeaturedCarouselProps) {
                   <div className="flex items-center gap-2 rounded-full glass px-6 py-4">
                     <Eye className="h-5 w-5 text-stone-gray/60" />
                     <span className="font-semibold text-stone-gray">
-                      {currentArtwork.views.toLocaleString()} lượt xem
+                      {currentArtwork.views.toLocaleString('en-US')} lượt xem
                     </span>
                   </div>
                 )}

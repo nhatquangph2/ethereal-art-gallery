@@ -32,12 +32,12 @@ export function ArtworkCard({ artwork, index }: ArtworkCardProps) {
       >
         <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-500 hover:shadow-2xl">
           {/* Image Container */}
-          <div className="relative aspect-[3/4] overflow-hidden">
+          <div className="relative aspect-[4/5] overflow-hidden bg-stone-gray/5">
             <Image
               src={artwork.thumbnailImage}
               alt={artwork.title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="object-contain transition-transform duration-700 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
 

@@ -1,273 +1,516 @@
 import { Artwork, GalleryCollection } from '@/types/artwork';
 
 /**
- * Mock artwork data for The Ethereal Art Gallery
- * Note: Replace paths with actual image and audio files when available
+ * Real famous artworks from art history - All Public Domain
+ * Downloaded from Wikimedia Commons
+ * See /public/CREDITS.md for attribution
  */
 export const artworks: Artwork[] = [
   {
-    id: 'art_01',
-    title: 'Bình Minh Hy Vọng',
-    artist: 'Trần Văn A',
-    year: '2024',
-    medium: 'Oil on Canvas',
-    dimensions: '120 × 180 cm',
-    description: 'Một tác phẩm về sự tái sinh và hy vọng trong những khoảnh khắc đầu tiên của ngày mới.',
-    baseImage: '/images/artworks/binh-minh-hy-vong.svg',
-    thumbnailImage: '/images/artworks/binh-minh-hy-vong-thumb.svg',
-    audioAmbient: '/audio/ambient/morning-birds.mp3',
-    tags: ['hopeful', 'serene', 'uplifting'],
-    dominantColors: ['#FDB462', '#FFFFB3', '#B3DE69'],
+    id: 'art_real_01',
+    title: 'The Starry Night',
+    artist: 'Vincent van Gogh',
+    year: '1889',
+    medium: 'Oil on canvas',
+    dimensions: '73.7 × 92.1 cm',
+    description: 'Painted from the asylum in Saint-Rémy-de-Provence, this masterpiece captures the night sky with swirling clouds, stars, and a crescent moon. The village below sleeps peacefully while the cosmos dances above.',
+    baseImage: '/images/artworks/starry-night.jpg',
+    thumbnailImage: '/images/artworks/starry-night.jpg',
+    audioAmbient: '/audio/ambient/night-peaceful.mp3', // You'll need to add this
+    tags: ['post-impressionism', 'night', 'peaceful', 'swirling', 'iconic'],
+    dominantColors: ['#1e3a8a', '#fbbf24', '#1f2937', '#6366f1'],
+    views: 125420,
+    reactions: [
+      { type: 'love', count: 8234 },
+      { type: 'inspiring', count: 5612 },
+      { type: 'thoughtful', count: 3421 },
+    ],
     storySegments: [
       {
-        id: 'seg_1',
-        text: 'Khi ánh sáng đầu tiên chạm vào mặt nước, thế giới dường như thở ra sau một giấc ngủ dài. Những tia nắng vàng óng len lỏi qua từng lớp sương mù, vẽ nên bức tranh của sự khởi đầu.',
-        audioLayer: '/audio/layers/piano-gentle.mp3',
+        id: 'seg_real_01_1',
+        text: 'Van Gogh painted this view from his asylum room window at Saint-Rémy-de-Provence, just thirteen months before his death. The swirling night sky reflects his turbulent emotions.',
+        audioLayer: '/audio/layers/strings-gentle.mp3',
         imageEffect: 'zoom_in_center',
-        duration: 8,
-      },
-      {
-        id: 'seg_2',
-        text: 'Nhưng sâu thẳm bên dưới, trong lòng nước tối, là sự hỗn loạn của những giấc mơ đã qua. Nghệ sĩ không che giấu nỗi đau - thay vào đó, ông để nó chìm xuống, nhường chỗ cho ánh sáng.',
-        audioLayer: '/audio/layers/cello-tension.mp3',
-        imageEffect: 'pan_left_down',
         duration: 10,
       },
       {
-        id: 'seg_3',
-        text: 'Và rồi, từ ranh giới giữa bóng tối và ánh sáng, một sự thật hiện ra: Hy vọng không phải là sự vắng mặt của đau khổ, mà là sự lựa chọn nhìn về phía trước.',
-        audioLayer: '/audio/layers/strings-hopeful.mp3',
-        imageEffect: 'scale_breathe',
-        duration: 12,
-      },
-    ],
-  },
-  {
-    id: 'art_02',
-    title: 'Mê Cung Nội Tâm',
-    artist: 'Nguyễn Thị B',
-    year: '2023',
-    medium: 'Acrylic and Mixed Media',
-    dimensions: '150 × 150 cm',
-    description: 'Khám phá những ngõ ngách phức tạp của tâm trí con người, nơi ký ức và cảm xúc đan xen.',
-    baseImage: '/images/artworks/me-cung-noi-tam.svg',
-    thumbnailImage: '/images/artworks/me-cung-noi-tam-thumb.svg',
-    audioAmbient: '/audio/ambient/wind-whispers.mp3',
-    tags: ['introspective', 'complex', 'mysterious'],
-    dominantColors: ['#8DD3C7', '#BEBADA', '#FB8072'],
-    storySegments: [
-      {
-        id: 'seg_1',
-        text: 'Mỗi con đường trong mê cung này đại diện cho một quyết định, một lựa chọn, một khoảnh khắc định hình con người chúng ta. Những bức tường không phải để giam cầm, mà để bảo vệ.',
-        audioLayer: '/audio/layers/ambient-echo.mp3',
-        imageEffect: 'pan_right',
-        duration: 9,
-      },
-      {
-        id: 'seg_2',
-        text: 'Trong những góc tối nhất của mê cung, chúng ta tìm thấy những mảnh vỡ của bản thân - những điều ta tưởng đã mất. Nghệ sĩ nhắc nhở: Lạc lối không phải là thất bại.',
-        audioLayer: '/audio/layers/synth-dark.mp3',
-        imageEffect: 'rotate_subtle',
-        duration: 11,
-      },
-      {
-        id: 'seg_3',
-        text: 'Vì có một sự thật ẩn giấu: Trung tâm của mê cung không chứa kho báu hay lối thoát. Nó chứa một tấm gương - phản chiếu con người bạn đã trở thành qua hành trình.',
-        audioLayer: '/audio/layers/bell-resonance.mp3',
-        imageEffect: 'zoom_in_center',
-        duration: 13,
-      },
-    ],
-  },
-  {
-    id: 'art_03',
-    title: 'Điệu Nhảy Của Thời Gian',
-    artist: 'Lê Văn C',
-    year: '2024',
-    medium: 'Digital Art',
-    dimensions: 'Variable',
-    description: 'Thời gian không đi thẳng - nó xoay, nó nhảy múa, nó quay về những nơi ta tưởng đã bỏ lại.',
-    baseImage: '/images/artworks/dieu-nhay-cua-thoi-gian.svg',
-    thumbnailImage: '/images/artworks/dieu-nhay-cua-thoi-gian-thumb.svg',
-    audioAmbient: '/audio/ambient/clock-ticks.mp3',
-    tags: ['temporal', 'dynamic', 'philosophical'],
-    dominantColors: ['#80B1D3', '#FDB462', '#B3DE69'],
-    storySegments: [
-      {
-        id: 'seg_1',
-        text: 'Nhìn kỹ vào những đường xoắn ốc - mỗi vòng tròn là một chu kỳ, một mùa, một thời kỳ trong đời. Chúng không bao giờ giống nhau hoàn toàn, nhưng luôn mang âm vang của nhau.',
-        audioLayer: '/audio/layers/harp-gentle.mp3',
-        imageEffect: 'rotate_subtle',
-        duration: 10,
-      },
-      {
-        id: 'seg_2',
-        text: 'Có những khoảnh khắc thời gian dường như dừng lại - được đánh dấu bằng những chấm sáng trong tranh. Đây là những giây phút định nghĩa, những ký ức không phai.',
-        audioLayer: '/audio/layers/crystal-chimes.mp3',
-        imageEffect: 'zoom_in_center',
-        duration: 8,
-      },
-      {
-        id: 'seg_3',
-        text: 'Nghệ sĩ thì thầm: "Thời gian không phải kẻ thù. Nó là vũ công, mời ta cùng nhảy. Câu hỏi duy nhất là - bạn có chấp nhận lời mời không?"',
-        audioLayer: '/audio/layers/violin-ethereal.mp3',
-        imageEffect: 'scale_breathe',
-        duration: 12,
-      },
-    ],
-  },
-  {
-    id: 'art_04',
-    title: 'Những Mảnh Vỡ Kết Nối',
-    artist: 'Phạm Thị D',
-    year: '2023',
-    medium: 'Ceramic and Gold Leaf',
-    dimensions: '90 × 120 cm',
-    description: 'Lấy cảm hứng từ nghệ thuật Kintsugi của Nhật Bản - vẻ đẹp trong những vết nứt được hàn gắn.',
-    baseImage: '/images/artworks/nhung-manh-vo-ket-noi.svg',
-    thumbnailImage: '/images/artworks/nhung-manh-vo-ket-noi-thumb.svg',
-    audioAmbient: '/audio/ambient/rain-gentle.mp3',
-    tags: ['healing', 'resilient', 'beautiful'],
-    dominantColors: ['#FFD700', '#FAFAFA', '#8B7355'],
-    storySegments: [
-      {
-        id: 'seg_1',
-        text: 'Những đường vàng không che giấu vết nứt - chúng tôn vinh nó. Mỗi mảnh vỡ là một câu chuyện, một thử thách đã vượt qua, một lần ta tưởng mình sẽ không đứng dậy được.',
+        id: 'seg_real_01_2',
+        text: 'The cypress tree in the foreground reaches upward like a dark flame, connecting earth to heaven. Van Gogh saw in nature a spiritual dimension that transcended the visible.',
         audioLayer: '/audio/layers/piano-contemplative.mp3',
-        imageEffect: 'zoom_in_center',
-        duration: 11,
-      },
-      {
-        id: 'seg_2',
-        text: 'Có người hỏi: "Tại sao không thay thế mảnh gốm mới?" Nghệ sĩ đáp: "Vì mảnh vỡ này mang lịch sử. Nó là bằng chứng rằng ta đã sống, đã trải nghiệm, đã tồn tại."',
-        audioLayer: '/audio/layers/cello-warm.mp3',
-        imageEffect: 'pan_right_up',
-        duration: 10,
-      },
-      {
-        id: 'seg_3',
-        text: 'Vàng không làm mảnh gốm trở lại như cũ. Nó tạo nên điều gì đó đẹp hơn - một tác phẩm nghệ thuật được sinh ra từ sự rạn nứt. Chúng ta cũng vậy.',
-        audioLayer: '/audio/layers/strings-uplifting.mp3',
-        imageEffect: 'scale_breathe',
-        duration: 13,
-      },
-    ],
-  },
-  {
-    id: 'art_05',
-    title: 'Giấc Mơ Sâu Thẳm',
-    artist: 'Hoàng Văn E',
-    year: '2024',
-    medium: 'Oil on Canvas',
-    dimensions: '200 × 130 cm',
-    description: 'Hành trình xuống tầng sâu của tiềm thức, nơi hiện thực và giấc mơ hòa quyện.',
-    baseImage: '/images/artworks/giac-mo-sau-tham.svg',
-    thumbnailImage: '/images/artworks/giac-mo-sau-tham-thumb.svg',
-    audioAmbient: '/audio/ambient/underwater-hum.mp3',
-    tags: ['surreal', 'dreamlike', 'subconscious'],
-    dominantColors: ['#1B4F72', '#5DADE2', '#A569BD'],
-    storySegments: [
-      {
-        id: 'seg_1',
-        text: 'Ở đáy đại dương của tâm thức, ánh sáng từ bề mặt chỉ còn là ký ức mờ nhạt. Đây là nơi những suy nghĩ không còn hình dạng, mà trở thành cảm giác thuần túy.',
-        audioLayer: '/audio/layers/ambient-deep.mp3',
-        imageEffect: 'pan_down',
-        duration: 9,
-      },
-      {
-        id: 'seg_2',
-        text: 'Những sinh vật lạ lùng bơi qua - chúng là biểu tượng của những nỗi sợ chưa được đặt tên, những khát vọng chưa được thừa nhận. Nghệ sĩ không sợ chúng - ông vẽ chúng với sự tò mò.',
-        audioLayer: '/audio/layers/synth-mysterious.mp3',
         imageEffect: 'pan_left',
         duration: 12,
       },
       {
-        id: 'seg_3',
-        text: 'Và trong độ sâu tuyệt đối, một phát hiện: Đại dương này không có đáy. Tiềm thức là vô hạn. Mỗi lần lặn sâu, ta khám phá thêm một phần của chính mình.',
-        audioLayer: '/audio/layers/whale-song.mp3',
-        imageEffect: 'zoom_in_center',
-        duration: 14,
+        id: 'seg_real_01_3',
+        text: 'Though created during deep personal suffering, the painting radiates with life and movement. The stars shine with an intensity that suggests hope beyond the darkness.',
+        audioLayer: '/audio/layers/strings-hopeful.mp3',
+        imageEffect: 'scale_breathe',
+        duration: 11,
       },
     ],
+    createdAt: '1889-06-01T00:00:00.000Z',
+    updatedAt: new Date().toISOString(),
   },
   {
-    id: 'art_06',
-    title: 'Vũ Khúc Của Gió',
-    artist: 'Đỗ Thị F',
-    year: '2023',
-    medium: 'Watercolor and Ink',
-    dimensions: '100 × 150 cm',
-    description: 'Những gì vô hình thường mạnh mẽ nhất - gió là lực lượng bất diệt, luôn chuyển động, luôn tự do.',
-    baseImage: '/images/artworks/vu-khuc-cua-gio.svg',
-    thumbnailImage: '/images/artworks/vu-khuc-cua-gio-thumb.svg',
-    audioAmbient: '/audio/ambient/wind-flowing.mp3',
-    tags: ['freedom', 'movement', 'invisible-power'],
-    dominantColors: ['#E8F5E9', '#81C784', '#FFECB3'],
+    id: 'art_real_02',
+    title: 'The Great Wave off Kanagawa',
+    artist: 'Katsushika Hokusai',
+    year: '1831',
+    medium: 'Woodblock print',
+    dimensions: '25.7 × 37.8 cm',
+    description: 'Part of the series "Thirty-Six Views of Mount Fuji," this iconic print depicts an enormous wave threatening boats off the coast of Kanagawa. Mount Fuji rises in the distance.',
+    baseImage: '/images/artworks/great-wave.jpg',
+    thumbnailImage: '/images/artworks/great-wave.jpg',
+    audioAmbient: '/audio/ambient/ocean-calm.mp3',
+    tags: ['ukiyo-e', 'japanese', 'wave', 'nature', 'powerful', 'iconic'],
+    dominantColors: ['#1e40af', '#f0f9ff', '#fef3c7'],
+    views: 98765,
+    reactions: [
+      { type: 'love', count: 6543 },
+      { type: 'inspiring', count: 4321 },
+      { type: 'beautiful', count: 5678 },
+    ],
     storySegments: [
       {
-        id: 'seg_1',
-        text: 'Bạn không thể nắm giữ gió, nhưng bạn có thể cảm nhận nó. Những nét cọ bay bổng trong tranh này không cố định hóa gió - chúng bắt giữ cảm giác của nó.',
-        audioLayer: '/audio/layers/flute-airy.mp3',
+        id: 'seg_real_02_1',
+        text: 'At 72 years old, Hokusai created this masterpiece that would become one of the most recognizable images in world art. The wave towers above tiny fishing boats, its claw-like foam reaching toward the sky.',
+        audioLayer: '/audio/layers/strings-dramatic.mp3',
         imageEffect: 'pan_right',
-        duration: 8,
+        duration: 10,
       },
       {
-        id: 'seg_2',
-        text: 'Gió không cưỡng lại chướng ngại vật - nó chảy qua, chảy xung quanh, chảy theo những con đường ít kháng cự nhất. Đây là triết lý sống: đừng đập vỡ tường, hãy tìm cửa.',
-        audioLayer: '/audio/layers/bamboo-chimes.mp3',
-        imageEffect: 'rotate_subtle',
+        id: 'seg_real_02_2',
+        text: 'In the background, Mount Fuji stands serene and unmoved—a symbol of permanence against the temporary fury of the sea. The contrast speaks to the Buddhist philosophy of impermanence.',
+        audioLayer: '/audio/layers/flute-japanese.mp3',
+        imageEffect: 'zoom_in_center',
         duration: 11,
       },
       {
-        id: 'seg_3',
-        text: 'Nghệ sĩ để lại khoảng trống trong tranh - không phải vì lười biếng, mà vì gió cần không gian để thở. Cuộc sống cũng vậy. Chúng ta cần khoảng trống để tồn tại.',
-        audioLayer: '/audio/layers/strings-freedom.mp3',
+        id: 'seg_real_02_3',
+        text: 'The Prussian blue pigment, newly arrived in Japan, gave Hokusai unprecedented tonal range. This synthesis of Japanese tradition and Western innovation created something entirely new.',
+        audioLayer: '/audio/layers/ambient-peaceful.mp3',
         imageEffect: 'scale_breathe',
-        duration: 13,
+        duration: 9,
       },
     ],
+    createdAt: '1831-01-01T00:00:00.000Z',
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'art_real_03',
+    title: 'Girl with a Pearl Earring',
+    artist: 'Johannes Vermeer',
+    year: '1665',
+    medium: 'Oil on canvas',
+    dimensions: '44.5 × 39 cm',
+    description: 'Often called the "Mona Lisa of the North," this captivating portrait shows a girl in exotic dress wearing a large pearl earring, gazing over her shoulder at the viewer.',
+    baseImage: '/images/artworks/girl-pearl-earring.jpg',
+    thumbnailImage: '/images/artworks/girl-pearl-earring.jpg',
+    audioAmbient: '/audio/ambient/chamber-music.mp3',
+    tags: ['baroque', 'portrait', 'mysterious', 'intimate', 'dutch-golden-age'],
+    dominantColors: ['#1f2937', '#fef3c7', '#0f172a'],
+    views: 87654,
+    reactions: [
+      { type: 'love', count: 7890 },
+      { type: 'thoughtful', count: 4567 },
+      { type: 'beautiful', count: 6789 },
+    ],
+    storySegments: [
+      {
+        id: 'seg_real_03_1',
+        text: 'Vermeer captures a fleeting moment—the girl turns to look at us, her lips slightly parted as if about to speak. Who is she? A daughter? A servant? A muse? The mystery endures.',
+        audioLayer: '/audio/layers/harpsichord-baroque.mp3',
+        imageEffect: 'zoom_in_center',
+        duration: 11,
+      },
+      {
+        id: 'seg_real_03_2',
+        text: 'The luminous pearl earring catches the light, drawing our eye to her face. Vermeer was a master of chiaroscuro, using light and shadow to create stunning three-dimensional effect.',
+        audioLayer: '/audio/layers/strings-intimate.mp3',
+        imageEffect: 'pan_left',
+        duration: 10,
+      },
+      {
+        id: 'seg_real_03_3',
+        text: 'Her exotic turban and costume suggest the Dutch fascination with the Orient. Yet her direct gaze creates an intimacy that transcends time and culture, connecting viewer to subject across centuries.',
+        audioLayer: '/audio/layers/cello-gentle.mp3',
+        imageEffect: 'scale_breathe',
+        duration: 12,
+      },
+    ],
+    createdAt: '1665-01-01T00:00:00.000Z',
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'art_real_04',
+    title: 'Water Lilies',
+    artist: 'Claude Monet',
+    year: '1906',
+    medium: 'Oil on canvas',
+    dimensions: '87.6 × 92.7 cm',
+    description: 'From Monet\'s extensive Water Lilies series, this painting depicts his flower garden at Giverny. The water\'s surface becomes a canvas for reflections of sky, clouds, and vegetation.',
+    baseImage: '/images/artworks/water-lilies.jpg',
+    thumbnailImage: '/images/artworks/water-lilies.jpg',
+    audioAmbient: '/audio/ambient/garden-peaceful.mp3',
+    tags: ['impressionism', 'nature', 'peaceful', 'water', 'garden'],
+    dominantColors: ['#6366f1', '#a5f3fc', '#10b981', '#86efac'],
+    views: 76543,
+    reactions: [
+      { type: 'love', count: 5432 },
+      { type: 'inspiring', count: 3210 },
+      { type: 'beautiful', count: 6543 },
+    ],
+    storySegments: [
+      {
+        id: 'seg_real_04_1',
+        text: 'In his later years, Monet became obsessed with his water garden at Giverny. He painted the lily pond over 250 times, each canvas capturing a different moment of light and atmosphere.',
+        audioLayer: '/audio/layers/piano-gentle.mp3',
+        imageEffect: 'pan_right',
+        duration: 11,
+      },
+      {
+        id: 'seg_real_04_2',
+        text: 'The water\'s surface dissolves into abstract patterns of color and light. Monet eliminates the horizon line, creating an ambiguous space where water, sky, and vegetation merge.',
+        audioLayer: '/audio/layers/strings-floating.mp3',
+        imageEffect: 'zoom_in_center',
+        duration: 10,
+      },
+      {
+        id: 'seg_real_04_3',
+        text: 'Painted as his eyesight was failing from cataracts, these late works show an artist transcending representation to touch pure visual sensation. They point forward to abstract expressionism.',
+        audioLayer: '/audio/layers/ambient-water.mp3',
+        imageEffect: 'scale_breathe',
+        duration: 12,
+      },
+    ],
+    createdAt: '1906-01-01T00:00:00.000Z',
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'art_real_05',
+    title: 'The Kiss',
+    artist: 'Gustav Klimt',
+    year: '1908',
+    medium: 'Oil and gold leaf on canvas',
+    dimensions: '180 × 180 cm',
+    description: 'Klimt\'s most famous work depicts a couple embracing, their bodies entwined and wrapped in elaborate robes decorated with geometric patterns. Gold leaf creates a radiant, decorative surface.',
+    baseImage: '/images/artworks/the-kiss.jpg',
+    thumbnailImage: '/images/artworks/the-kiss.jpg',
+    audioAmbient: '/audio/ambient/romantic-strings.mp3',
+    tags: ['art-nouveau', 'love', 'golden', 'symbolic', 'decorative'],
+    dominantColors: ['#fbbf24', '#a855f7', '#10b981'],
+    views: 92341,
+    reactions: [
+      { type: 'love', count: 9876 },
+      { type: 'inspiring', count: 5432 },
+      { type: 'beautiful', count: 7654 },
+    ],
+    storySegments: [
+      {
+        id: 'seg_real_05_1',
+        text: 'Created at the height of Klimt\'s "Golden Period," this painting uses actual gold leaf applied to the canvas. The lovers exist in a timeless, spiritual realm, disconnected from earthly concerns.',
+        audioLayer: '/audio/layers/strings-romantic.mp3',
+        imageEffect: 'zoom_in_center',
+        duration: 11,
+      },
+      {
+        id: 'seg_real_05_2',
+        text: 'Notice the geometric patterns on their robes—rectangles for him, circles for her, symbolizing masculine and feminine principles. At the edge where they meet, the patterns merge and transform.',
+        audioLayer: '/audio/layers/piano-tender.mp3',
+        imageEffect: 'pan_left',
+        duration: 10,
+      },
+      {
+        id: 'seg_real_05_3',
+        text: 'The woman\'s face shows complete surrender and rapture, while we cannot see the man\'s face at all. Klimt captures love not as mutual gaze but as shared dissolution of self.',
+        audioLayer: '/audio/layers/cello-warm.mp3',
+        imageEffect: 'scale_breathe',
+        duration: 12,
+      },
+    ],
+    createdAt: '1908-01-01T00:00:00.000Z',
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'art_real_06',
+    title: 'The Scream',
+    artist: 'Edvard Munch',
+    year: '1893',
+    medium: 'Oil, tempera, pastel and crayon on cardboard',
+    dimensions: '91 × 73.5 cm',
+    description: 'An icon of expressionism, this painting shows an agonized figure against a tumultuous orange sky. The androgynous figure clutches its face as it releases a primal scream of existential anxiety.',
+    baseImage: '/images/artworks/the-scream.jpg',
+    thumbnailImage: '/images/artworks/the-scream.jpg',
+    audioAmbient: '/audio/ambient/tension-ambient.mp3',
+    tags: ['expressionism', 'anxiety', 'emotional', 'iconic', 'psychological'],
+    dominantColors: ['#ef4444', '#fb923c', '#0f172a'],
+    views: 103456,
+    reactions: [
+      { type: 'thoughtful', count: 6789 },
+      { type: 'inspiring', count: 4321 },
+      { type: 'love', count: 5678 },
+    ],
+    storySegments: [
+      {
+        id: 'seg_real_06_1',
+        text: 'Munch wrote of the inspiration: "I was walking along the road with two friends when the sun set; suddenly, the sky turned as red as blood. I stopped and leaned against the fence, feeling unspeakably tired."',
+        audioLayer: '/audio/layers/strings-tense.mp3',
+        imageEffect: 'zoom_in_center',
+        duration: 12,
+      },
+      {
+        id: 'seg_real_06_2',
+        text: 'The figure\'s scream seems to ripple through the entire landscape—the sky, the fjord, even the wooden fence all vibrate with anxiety. Nature itself becomes a projection of human emotion.',
+        audioLayer: '/audio/layers/synth-dark.mp3',
+        imageEffect: 'rotate_subtle',
+        duration: 10,
+      },
+      {
+        id: 'seg_real_06_3',
+        text: 'Munch created this during a period of great personal turmoil, grappling with the death of family members and his own mental health. The painting became an icon of modern anxiety and alienation.',
+        audioLayer: '/audio/layers/ambient-echo.mp3',
+        imageEffect: 'pan_right',
+        duration: 11,
+      },
+    ],
+    createdAt: '1893-01-01T00:00:00.000Z',
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'art_real_07',
+    title: 'Wanderer above the Sea of Fog',
+    artist: 'Caspar David Friedrich',
+    year: '1818',
+    medium: 'Oil on canvas',
+    dimensions: '94.8 × 74.8 cm',
+    description: 'A man stands on a rocky precipice, his back to the viewer, gazing out over a sea of fog-covered mountains. The painting epitomizes the Romantic sublime—humans confronting the vastness of nature.',
+    baseImage: '/images/artworks/wanderer-sea-fog.jpg',
+    thumbnailImage: '/images/artworks/wanderer-sea-fog.jpg',
+    audioAmbient: '/audio/ambient/mountain-wind.mp3',
+    tags: ['romanticism', 'nature', 'sublime', 'contemplative', 'landscape'],
+    dominantColors: ['#64748b', '#94a3b8', '#cbd5e1'],
+    views: 67890,
+    reactions: [
+      { type: 'thoughtful', count: 5678 },
+      { type: 'inspiring', count: 6789 },
+      { type: 'beautiful', count: 4567 },
+    ],
+    storySegments: [
+      {
+        id: 'seg_real_07_1',
+        text: 'The wanderer stands at a threshold between known and unknown. His elevated position suggests both mastery and isolation. Friedrich invites us to share his viewpoint, to see ourselves in his solitary figure.',
+        audioLayer: '/audio/layers/strings-epic.mp3',
+        imageEffect: 'zoom_in_center',
+        duration: 11,
+      },
+      {
+        id: 'seg_real_07_2',
+        text: 'The sea of fog conceals the valleys while revealing mountain peaks—a perfect metaphor for Romantic philosophy. Some truths remain hidden while others stand revealed in stark clarity.',
+        audioLayer: '/audio/layers/piano-contemplative.mp3',
+        imageEffect: 'pan_right',
+        duration: 12,
+      },
+      {
+        id: 'seg_real_07_3',
+        text: 'Friedrich painted during Germany\'s political fragmentation. The painting can be read as nationalistic—the wanderer surveying German lands—or as universal meditation on human place in the cosmos.',
+        audioLayer: '/audio/layers/ambient-wind.mp3',
+        imageEffect: 'scale_breathe',
+        duration: 10,
+      },
+    ],
+    createdAt: '1818-01-01T00:00:00.000Z',
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'art_real_08',
+    title: 'The Birth of Venus',
+    artist: 'Sandro Botticelli',
+    year: '1485',
+    medium: 'Tempera on canvas',
+    dimensions: '172.5 × 278.9 cm',
+    description: 'One of the most famous paintings of the Renaissance, depicting Venus emerging from the sea as a fully grown woman, arriving at the shore on a giant scallop shell. She is greeted by the nymphs.',
+    baseImage: '/images/artworks/birth-venus.jpg',
+    thumbnailImage: '/images/artworks/birth-venus.jpg',
+    audioAmbient: '/audio/ambient/renaissance-pastoral.mp3',
+    tags: ['renaissance', 'mythology', 'classical', 'beauty', 'iconic'],
+    dominantColors: ['#fef3c7', '#fbcfe8', '#bae6fd'],
+    views: 85432,
+    reactions: [
+      { type: 'beautiful', count: 8765 },
+      { type: 'love', count: 6543 },
+      { type: 'inspiring', count: 5432 },
+    ],
+    storySegments: [
+      {
+        id: 'seg_real_08_1',
+        text: 'Botticelli reimagines the classical myth of Venus\'s birth from sea foam after the castration of Uranus. She arrives at Cyprus, blown by the winds, standing in a pose derived from ancient "Venus Pudica" sculptures.',
+        audioLayer: '/audio/layers/lute-renaissance.mp3',
+        imageEffect: 'zoom_in_center',
+        duration: 12,
+      },
+      {
+        id: 'seg_real_08_2',
+        text: 'The painting was commissioned by the Medici family for their villa. It represents a synthesis of Christian and pagan thought characteristic of Renaissance humanism—divine love manifested in physical beauty.',
+        audioLayer: '/audio/layers/strings-flowing.mp3',
+        imageEffect: 'pan_left',
+        duration: 11,
+      },
+      {
+        id: 'seg_real_08_3',
+        text: 'Notice Venus\'s melancholy expression despite her idealized beauty. Botticelli imbues her with a wistful, introspective quality that makes her more than a symbol—she becomes a feeling, thinking being.',
+        audioLayer: '/audio/layers/flute-gentle.mp3',
+        imageEffect: 'scale_breathe',
+        duration: 10,
+      },
+    ],
+    createdAt: '1485-01-01T00:00:00.000Z',
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'art_real_09',
+    title: 'Nighthawks',
+    artist: 'Edward Hopper',
+    year: '1942',
+    medium: 'Oil on canvas',
+    dimensions: '84.1 × 152.4 cm',
+    description: 'Hopper\'s most famous painting depicts people in a downtown diner late at night, seen through the establishment\'s large glass windows. The painting has become an icon of urban isolation.',
+    baseImage: '/images/artworks/nighthawks.jpg',
+    thumbnailImage: '/images/artworks/nighthawks.jpg',
+    audioAmbient: '/audio/ambient/city-night.mp3',
+    tags: ['realism', 'urban', 'loneliness', 'american', 'noir'],
+    dominantColors: ['#fbbf24', '#0f172a', '#dc2626'],
+    views: 79876,
+    reactions: [
+      { type: 'thoughtful', count: 6789 },
+      { type: 'love', count: 5432 },
+      { type: 'inspiring', count: 4321 },
+    ],
+    storySegments: [
+      {
+        id: 'seg_real_09_1',
+        text: 'Painted shortly after Pearl Harbor, "Nighthawks" captures a mood of wartime anxiety. The isolated figures sit together yet apart, unable to connect despite their physical proximity.',
+        audioLayer: '/audio/layers/jazz-ambient.mp3',
+        imageEffect: 'pan_right',
+        duration: 11,
+      },
+      {
+        id: 'seg_real_09_2',
+        text: 'Hopper eliminates the street-level door—there\'s no visible way to enter or exit the diner. The people are trapped in their fluorescent-lit fishbowl while darkness presses in from outside.',
+        audioLayer: '/audio/layers/piano-noir.mp3',
+        imageEffect: 'zoom_in_center',
+        duration: 10,
+      },
+      {
+        id: 'seg_real_09_3',
+        text: 'The painting influenced countless films and artworks. Film noir directors cited Hopper\'s use of light and shadow. It has become an emblem of alienation in modern urban life.',
+        audioLayer: '/audio/layers/strings-melancholy.mp3',
+        imageEffect: 'scale_breathe',
+        duration: 12,
+      },
+    ],
+    createdAt: '1942-01-01T00:00:00.000Z',
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'art_real_10',
+    title: 'The Son of Man',
+    artist: 'René Magritte',
+    year: '1964',
+    medium: 'Oil on canvas',
+    dimensions: '116 × 89 cm',
+    description: 'Magritte\'s iconic surrealist self-portrait shows a man in a bowler hat and overcoat standing before a low wall, beyond which is the sea and cloudy sky. A green apple obscures his face.',
+    baseImage: '/images/artworks/son-of-man.jpg',
+    thumbnailImage: '/images/artworks/son-of-man.jpg',
+    audioAmbient: '/audio/ambient/surreal-ambient.mp3',
+    tags: ['surrealism', 'identity', 'mysterious', 'modern', 'symbolic'],
+    dominantColors: ['#6366f1', '#10b981', '#1f2937'],
+    views: 71234,
+    reactions: [
+      { type: 'thoughtful', count: 5678 },
+      { type: 'inspiring', count: 4567 },
+      { type: 'love', count: 3456 },
+    ],
+    storySegments: [
+      {
+        id: 'seg_real_10_1',
+        text: 'Magritte wrote: "Everything we see hides another thing, we always want to see what is hidden by what we see." The visible conceals rather than reveals truth.',
+        audioLayer: '/audio/layers/ambient-mysterious.mp3',
+        imageEffect: 'zoom_in_center',
+        duration: 10,
+      },
+      {
+        id: 'seg_real_10_2',
+        text: 'The bowler-hatted man recurs throughout Magritte\'s work as a kind of everyman figure—anonymous, middle-class, conformist. The apple suggests both temptation and the impossibility of knowledge.',
+        audioLayer: '/audio/layers/piano-quirky.mp3',
+        imageEffect: 'pan_left',
+        duration: 11,
+      },
+      {
+        id: 'seg_real_10_3',
+        text: 'Behind the apple, you can glimpse the man\'s eyes. This partial concealment is more disturbing than total hiding. We sense a human presence but cannot fully connect with it.',
+        audioLayer: '/audio/layers/strings-eerie.mp3',
+        imageEffect: 'scale_breathe',
+        duration: 12,
+      },
+    ],
+    createdAt: '1964-01-01T00:00:00.000Z',
+    updatedAt: new Date().toISOString(),
   },
 ];
 
-/**
- * Main gallery collection
- */
-export const mainCollection: GalleryCollection = {
-  id: 'main',
-  title: 'The Ethereal Art Gallery',
-  description: 'Nơi trú ẩn cho tâm hồn - một hành trình khám phá nghệ thuật qua âm thanh và chuyển động.',
-  artworks,
+// Featured collection
+export const featuredCollection: GalleryCollection = {
+  id: 'featured_real',
+  name: 'Masterpieces of Art History',
+  description: 'A curated selection of the most famous paintings in Western art history, from Renaissance to Modern art.',
+  artworks: artworks.slice(0, 5),
+  mood: 'inspiring',
 };
 
-/**
- * Get artwork by ID
- */
+// Collections by period
+export const renaissanceCollection: GalleryCollection = {
+  id: 'renaissance',
+  name: 'Renaissance & Baroque',
+  description: 'Classical beauty and technical mastery from the golden ages of European art.',
+  artworks: artworks.filter(a =>
+    a.tags?.includes('renaissance') || a.tags?.includes('baroque')
+  ),
+  mood: 'classical',
+};
+
+export const impressionismCollection: GalleryCollection = {
+  id: 'impressionism',
+  name: 'Impressionism & Post-Impressionism',
+  description: 'Light, color, and fleeting moments captured by the revolutionary artists of late 19th century.',
+  artworks: artworks.filter(a =>
+    a.tags?.includes('impressionism') || a.tags?.includes('post-impressionism')
+  ),
+  mood: 'peaceful',
+};
+
+export const modernCollection: GalleryCollection = {
+  id: 'modern',
+  name: 'Modern & Surrealist',
+  description: 'Breaking boundaries and exploring new perspectives in 20th century art.',
+  artworks: artworks.filter(a =>
+    a.tags?.includes('expressionism') ||
+    a.tags?.includes('surrealism') ||
+    a.tags?.includes('realism')
+  ),
+  mood: 'mysterious',
+};
+
+// Utility functions
+export function getAllArtworks(): Artwork[] {
+  return artworks;
+}
+
 export function getArtworkById(id: string): Artwork | undefined {
-  return artworks.find((artwork) => artwork.id === id);
+  return artworks.find(artwork => artwork.id === id);
 }
 
-/**
- * Get artworks by tag (for mood-based filtering)
- */
-export function getArtworksByTag(tag: string): Artwork[] {
-  return artworks.filter((artwork) => artwork.tags?.includes(tag));
-}
-
-/**
- * Get recommended artworks based on current artwork
- * (Simple implementation - can be enhanced with ML)
- */
 export function getRecommendedArtworks(currentId: string, limit: number = 3): Artwork[] {
-  const current = getArtworkById(currentId);
-  if (!current) return [];
-
-  // Find artworks with similar tags
-  const similarByTag = artworks
-    .filter((artwork) =>
-      artwork.id !== currentId &&
-      artwork.tags?.some((tag) => current.tags?.includes(tag))
-    )
+  return artworks
+    .filter(artwork => artwork.id !== currentId)
     .slice(0, limit);
-
-  return similarByTag;
 }

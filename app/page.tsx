@@ -12,7 +12,7 @@ import { FeaturedCarousel } from '@/components/home/featured-carousel';
 import { HorizontalGallery } from '@/components/home/horizontal-gallery';
 import { StatsCounter } from '@/components/home/stats-counter';
 import { GSAPScrollEffects, ScrollProgress } from '@/components/gsap-scroll-effects';
-import { artworks, mainCollection } from '@/data/artworks';
+import { artworks } from '@/data/artworks';
 import { getAudioManager } from '@/lib/audio-manager';
 
 if (typeof window !== 'undefined') {

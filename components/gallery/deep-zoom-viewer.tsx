@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import OpenSeadragon from 'openseadragon';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ZoomIn, ZoomOut, Maximize2, X } from 'lucide-react';
 import { useHaptic } from '@/lib/haptic';
+
+// Import OpenSeadragon types
+type OpenSeadragonViewer = any;
 
 interface DeepZoomViewerProps {
   imageUrl: string;
@@ -14,15 +16,19 @@ interface DeepZoomViewerProps {
 
 export function DeepZoomViewer({ imageUrl, title, onClose }: DeepZoomViewerProps) {
   const viewerRef = useRef<HTMLDivElement>(null);
-  const osdViewerRef = useRef<OpenSeadragon.Viewer | null>(null);
+  const osdViewerRef = useRef<OpenSeadragonViewer | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const { onTap } = useHaptic();
 
   useEffect(() => {
     if (!viewerRef.current) return;
 
-    // Initialize OpenSeadragon
-    const viewer = OpenSeadragon({
+    // Dynamically import OpenSeadragon only on client side
+    import('openseadragon').then((OpenSeadragon) => {
+      if (!viewerRef.current) return;
+
+      // Initialize OpenSeadragon
+      const viewer = OpenSeadragon.default({
       element: viewerRef.current,
       prefixUrl: 'https://cdn.jsdelivr.net/npm/openseadragon@4.1/build/openseadragon/images/',
       tileSources: {
@@ -49,10 +55,13 @@ export function DeepZoomViewer({ imageUrl, title, onClose }: DeepZoomViewerProps
       },
     });
 
-    osdViewerRef.current = viewer;
+      osdViewerRef.current = viewer;
+    });
 
     return () => {
-      viewer.destroy();
+      if (osdViewerRef.current) {
+        osdViewerRef.current.destroy();
+      }
     };
   }, [imageUrl]);
 

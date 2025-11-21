@@ -205,12 +205,12 @@ export function HorizontalGallery({ title, artworks }: HorizontalGalleryProps) {
                   href={`/artwork/${artwork.id}`}
                   className={isDragging ? 'pointer-events-none' : ''}
                 >
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-3xl glass-strong">
-                    {/* Image */}
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-3xl glass-strong bg-stone-gray/5">
+                    {/* Image - Preserve aspect ratio with object-contain */}
                     <img
                       src={artwork.thumbnailImage}
                       alt={artwork.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
                     />
 
                     {/* Gradient Overlay */}
