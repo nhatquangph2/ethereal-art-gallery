@@ -11,17 +11,19 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [darkMode, setDarkModeState] = useState(false);
-
-  // Load theme from localStorage on mount
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('ethereal_dark_mode');
-    if (savedTheme !== null) {
-      const isDark = savedTheme === 'true';
-      setDarkModeState(isDark);
-      updateTheme(isDark);
+  const [darkMode, setDarkModeState] = useState(() => {
+    // Initialize with saved theme to prevent flash
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('ethereal_dark_mode');
+      return savedTheme === 'true';
     }
-  }, []);
+    return false;
+  });
+
+  // Apply theme on mount and when darkMode changes
+  useEffect(() => {
+    updateTheme(darkMode);
+  }, [darkMode]);
 
   // Update theme in document
   const updateTheme = (isDark: boolean) => {
