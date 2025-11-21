@@ -20,6 +20,7 @@ export default function ArtistDashboardPage() {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [editingArtwork, setEditingArtwork] = useState<Artwork | null>(null);
+  const [autoSaving, setAutoSaving] = useState(false);
 
   // Search & Filter state
   const [searchQuery, setSearchQuery] = useState('');
@@ -27,20 +28,32 @@ export default function ArtistDashboardPage() {
   const [filterMedium, setFilterMedium] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'date' | 'title' | 'views'>('date');
 
-  // Form state
-  const [formData, setFormData] = useState<Partial<Artwork>>({
-    title: '',
-    artist: user?.artistName || user?.name || '',
-    year: new Date().getFullYear().toString(),
-    medium: '',
-    dimensions: '',
-    description: '',
-    baseImage: '',
-    thumbnailImage: '',
-    audioAmbient: '',
-    tags: [],
-    dominantColors: [],
-    storySegments: [],
+  // Form state - load from localStorage if exists
+  const [formData, setFormData] = useState<Partial<Artwork>>(() => {
+    if (typeof window !== 'undefined') {
+      const savedForm = localStorage.getItem('ethereal_artist_form_draft');
+      if (savedForm) {
+        try {
+          return JSON.parse(savedForm);
+        } catch (e) {
+          console.error('Failed to parse saved form:', e);
+        }
+      }
+    }
+    return {
+      title: '',
+      artist: user?.artistName || user?.name || '',
+      year: new Date().getFullYear().toString(),
+      medium: '',
+      dimensions: '',
+      description: '',
+      baseImage: '',
+      thumbnailImage: '',
+      audioAmbient: '',
+      tags: [],
+      dominantColors: [],
+      storySegments: [],
+    };
   });
 
   // Redirect if not artist
@@ -66,6 +79,31 @@ export default function ArtistDashboardPage() {
       }
     }
   }, [user]);
+
+  // Show toast if form was restored from draft
+  useEffect(() => {
+    if (showCreateForm) {
+      const hasDraft = localStorage.getItem('ethereal_artist_form_draft');
+      if (hasDraft && formData.title) {
+        toast.info('Đã khôi phục bản nháp của bạn', {
+          description: 'Dữ liệu form đã được tự động lưu trước đó',
+        });
+      }
+    }
+  }, [showCreateForm]);
+
+  // Auto-save form data to localStorage when it changes (debounced)
+  useEffect(() => {
+    if (showCreateForm && (formData.title || formData.description)) {
+      setAutoSaving(true);
+      const timer = setTimeout(() => {
+        localStorage.setItem('ethereal_artist_form_draft', JSON.stringify(formData));
+        setAutoSaving(false);
+      }, 1000); // Debounce 1s
+
+      return () => clearTimeout(timer);
+    }
+  }, [formData, showCreateForm]);
 
   const handleInputChange = (field: keyof Artwork, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -130,9 +168,17 @@ export default function ArtistDashboardPage() {
 
     localStorage.setItem('ethereal_artworks', JSON.stringify(allArtworks));
 
+    // Clear draft from localStorage
+    localStorage.removeItem('ethereal_artist_form_draft');
+
     // Refresh artworks list
     const userArtworks = allArtworks.filter((a) => user?.artworkIds?.includes(a.id) || a.id === newArtwork.id);
     setArtworks(userArtworks);
+
+    // Show success message
+    toast.success(editingArtwork ? 'Đã cập nhật tác phẩm!' : 'Đã tạo tác phẩm mới!', {
+      description: 'Dữ liệu đã được lưu thành công',
+    });
 
     // Reset form
     setShowCreateForm(false);
@@ -240,6 +286,10 @@ export default function ArtistDashboardPage() {
 
   const handleCancel = () => {
     onTap();
+
+    // Clear draft from localStorage
+    localStorage.removeItem('ethereal_artist_form_draft');
+
     setShowCreateForm(false);
     setEditingArtwork(null);
     setFormData({
@@ -338,9 +388,24 @@ export default function ArtistDashboardPage() {
               className="mb-6 glass rounded-3xl p-6"
             >
               <div className="mb-4 flex items-center justify-between">
-                <h2 className="font-display text-2xl font-semibold text-stone-gray">
-                  {editingArtwork ? 'Chỉnh sửa tác phẩm' : 'Tác phẩm mới'}
-                </h2>
+                <div className="flex items-center gap-3">
+                  <h2 className="font-display text-2xl font-semibold text-stone-gray">
+                    {editingArtwork ? 'Chỉnh sửa tác phẩm' : 'Tác phẩm mới'}
+                  </h2>
+                  <AnimatePresence>
+                    {autoSaving && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        className="flex items-center gap-2 rounded-full bg-purple-500/10 px-3 py-1"
+                      >
+                        <div className="h-2 w-2 animate-pulse rounded-full bg-purple-500" />
+                        <span className="text-xs text-purple-600">Đang lưu...</span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
                 <motion.button
                   whileTap={{ scale: 0.95 }}
                   onClick={handleCancel}
